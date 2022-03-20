@@ -3,6 +3,7 @@ package account.service;
 import account.domain.User;
 import account.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Locale;
@@ -11,13 +12,14 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+        this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
     }
-
 
     public Optional<User> findUser(String email) {
         return userRepository.findUserByEmailIgnoreCase(email);
@@ -25,6 +27,7 @@ public class UserService {
 
     public void addNewUser(User myUser) {
         myUser.setEmail(myUser.getEmail().toLowerCase(Locale.ROOT));
+        myUser.setPassword(passwordEncoder.encode(myUser.getPassword()));
         userRepository.save(myUser);
     }
 }

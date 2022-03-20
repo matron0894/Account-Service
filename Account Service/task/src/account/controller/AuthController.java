@@ -1,7 +1,7 @@
 package account.controller;
 
 import account.domain.User;
-import account.exception.MyEntityNotFoundException;
+import account.exception.UsernameNotFoundException;
 import account.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,18 +25,12 @@ public class AuthController {
         this.userService = userService;
     }
 
-
     @PostMapping("/signup")
     public ResponseEntity<User> signup(@Valid @RequestBody User user) {
         Optional<User> newUser = userService.findUser(user.getEmail());
-        if (newUser.isPresent()) throw new MyEntityNotFoundException();
+        if (newUser.isPresent()) throw new UsernameNotFoundException();
         userService.addNewUser(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
-//    @PostMapping("/changepass")
-//    public void changePass() {
-//
-//    }
-
 
 }

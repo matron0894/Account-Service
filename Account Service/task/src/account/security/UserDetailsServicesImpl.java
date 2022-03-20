@@ -29,11 +29,9 @@ public class UserDetailsServicesImpl implements UserDetailsService {
                         .roles("ADMIN")
                         .build();
     }
-
-
-    public User getUserByEmail(String email) throws UsernameNotFoundException {
-        return userRepository.findUserByEmailIgnoreCase(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Not found: " + email));
-
-    }
+//    public User getUserByEmail(String email) throws UsernameNotFoundException {
+//        return userRepository.findUserByEmailIgnoreCase(email.toLowerCase(Locale.ROOT))
+//                .orElseThrow(() -> new UsernameNotFoundException("Not found: " + email));
+//
+//    }
 }

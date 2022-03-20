@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 public class UserDetailsImpl implements UserDetails {
     private final String username;
@@ -14,7 +15,7 @@ public class UserDetailsImpl implements UserDetails {
     private final List<GrantedAuthority> rolesAndAuthorities;
 
     public UserDetailsImpl(User user) {
-        username = user.getEmail();
+        username = user.getEmail().toLowerCase(Locale.ROOT);
         password = user.getPassword();
         rolesAndAuthorities = List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }

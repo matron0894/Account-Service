@@ -1,0 +1,2316 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class AccountServiceTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class AccountServiceTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/default-package.html">default-package</a> &gt; AccountServiceTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">11.618s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">start</td>
+<td class="success">11.618s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>?[1;31m
+Start test 1?[0m
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.3.1.RELEASE)
+
+2022-03-20 02:07:11.429  INFO 7468 --- [    Test worker] account.AccountServiceApplication        : Starting AccountServiceApplication on DESKTOP-L7B3B4M with PID 7468 (started by matro in C:\Users\matro\Documents\IdeaProjects\Account Service\Account Service\task)
+2022-03-20 02:07:11.436  INFO 7468 --- [    Test worker] account.AccountServiceApplication        : No active profile set, falling back to default profiles: default
+2022-03-20 02:07:12.878  INFO 7468 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2022-03-20 02:07:12.974  INFO 7468 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 85ms. Found 1 JPA repository interfaces.
+2022-03-20 02:07:13.665  INFO 7468 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@62447265' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-03-20 02:07:13.671  INFO 7468 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-03-20 02:07:14.061  INFO 7468 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
+2022-03-20 02:07:14.075  INFO 7468 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-03-20 02:07:14.076  INFO 7468 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
+2022-03-20 02:07:14.299  INFO 7468 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-03-20 02:07:14.299  INFO 7468 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2770 ms
+2022-03-20 02:07:14.498  INFO 7468 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-03-20 02:07:14.776  INFO 7468 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-03-20 02:07:14.786  INFO 7468 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:../service_db'
+2022-03-20 02:07:15.011  INFO 7468 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-20 02:07:15.087  INFO 7468 --- [         task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-03-20 02:07:15.225  INFO 7468 --- [         task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
+2022-03-20 02:07:15.248  WARN 7468 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-03-20 02:07:15.517  INFO 7468 --- [         task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2022-03-20 02:07:15.784  INFO 7468 --- [         task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2022-03-20 02:07:16.078  INFO 7468 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2022-03-20 02:07:16.196  INFO 7468 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@df0e7bc, org.springframework.security.web.context.SecurityContextPersistenceFilter@3b020991, org.springframework.security.web.header.HeaderWriterFilter@4b0f53a4, org.springframework.security.web.authentication.logout.LogoutFilter@41ea2a22, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2d046814, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7d423e9e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2ee9b60c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3158ebe7, org.springframework.security.web.session.SessionManagementFilter@56c64086, org.springframework.security.web.access.ExceptionTranslationFilter@9c590ee, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3e907d67]
+2022-03-20 02:07:16.203  WARN 7468 --- [    Test worker] o.s.s.c.a.web.builders.WebSecurity       : 
+
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+Hibernate: create table users (id bigint generated by default as identity, email varchar(255), lastname varchar(255), name varchar(255), password varchar(255), primary key (id))
+2022-03-20 02:07:17.061  INFO 7468 --- [         task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-03-20 02:07:17.073  INFO 7468 --- [         task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-03-20 02:07:17.239  INFO 7468 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
+2022-03-20 02:07:17.240  INFO 7468 --- [    Test worker] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2022-03-20 02:07:17.645  INFO 7468 --- [    Test worker] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2022-03-20 02:07:17.657  INFO 7468 --- [    Test worker] account.AccountServiceApplication        : Started AccountServiceApplication in 6.809 seconds (JVM running for 8.59)
+2022-03-20 02:07:18.123  INFO 7468 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-03-20 02:07:18.123  INFO 7468 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-03-20 02:07:18.136  INFO 7468 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
+2022-03-20 02:07:18.153  INFO 7468 --- [io-28852-exec-1] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@3b4ef0ee
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 79
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+Hibernate: insert into users (id, email, lastname, name, password) values (null, ?, ?, ?, ?)
+2022-03-20 02:07:18.608  INFO 7468 --- [io-28852-exec-2] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@3804710
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 79
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+2022-03-20 02:07:18.642  INFO 7468 --- [io-28852-exec-2] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@35f61f66
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 79
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 2?[0m
+2022-03-20 02:07:18.701  INFO 7468 --- [io-28852-exec-3] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@30e1a09b
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 79
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+2022-03-20 02:07:18.709  INFO 7468 --- [io-28852-exec-3] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@3a9c152e
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 79
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 3?[0m
+2022-03-20 02:07:18.718  INFO 7468 --- [io-28852-exec-4] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@69acc3a8
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 79
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+2022-03-20 02:07:18.725  INFO 7468 --- [io-28852-exec-4] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@51eec5f8
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 79
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 4?[0m
+2022-03-20 02:07:18.737  INFO 7468 --- [io-28852-exec-5] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@6f36315f
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 79
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+2022-03-20 02:07:18.749  INFO 7468 --- [io-28852-exec-5] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@4b0d9b9d
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 79
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 5?[0m
+2022-03-20 02:07:18.759  INFO 7468 --- [io-28852-exec-6] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@6cffe9c1
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 91
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+Hibernate: insert into users (id, email, lastname, name, password) values (null, ?, ?, ?, ?)
+2022-03-20 02:07:18.777  INFO 7468 --- [io-28852-exec-7] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@762ef42f
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 91
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+2022-03-20 02:07:18.783  INFO 7468 --- [io-28852-exec-7] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@5b4732b3
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 91
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 6?[0m
+2022-03-20 02:07:18.794  INFO 7468 --- [io-28852-exec-8] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@146806d5
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 91
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+2022-03-20 02:07:18.800  INFO 7468 --- [io-28852-exec-8] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@743203fa
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 91
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 7?[0m
+2022-03-20 02:07:18.810  INFO 7468 --- [io-28852-exec-9] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@689f708f
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 91
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+2022-03-20 02:07:18.829  INFO 7468 --- [io-28852-exec-9] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@1f0a08a3
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 91
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 8?[0m
+2022-03-20 02:07:18.841  INFO 7468 --- [io-28852-exec-9] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@4304dd7b
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 75
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-03-20 02:07:18.856  WARN 7468 --- [io-28852-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity&lt;account.domain.User&gt; account.controller.AuthController.signup(account.domain.User): [Field error in object 'user' on field 'name': rejected value []; codes [NotBlank.user.name,NotBlank.name,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.name,name]; arguments []; default message [name]]; default message [firstname can't be empty]] ]
+2022-03-20 02:07:18.857  INFO 7468 --- [io-28852-exec-9] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@20239846
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 75
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 9?[0m
+2022-03-20 02:07:18.871  INFO 7468 --- [io-28852-exec-1] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@2d9c6a4b
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 65
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-03-20 02:07:18.875  WARN 7468 --- [io-28852-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity&lt;account.domain.User&gt; account.controller.AuthController.signup(account.domain.User): [Field error in object 'user' on field 'name': rejected value [null]; codes [NotBlank.user.name,NotBlank.name,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.name,name]; arguments []; default message [name]]; default message [firstname can't be empty]] ]
+2022-03-20 02:07:18.876  INFO 7468 --- [io-28852-exec-1] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@b8bceec
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 65
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 10?[0m
+2022-03-20 02:07:18.890  INFO 7468 --- [io-28852-exec-2] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@4d927eba
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 76
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-03-20 02:07:18.899  WARN 7468 --- [io-28852-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity&lt;account.domain.User&gt; account.controller.AuthController.signup(account.domain.User): [Field error in object 'user' on field 'lastname': rejected value []; codes [NotBlank.user.lastname,NotBlank.lastname,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.lastname,lastname]; arguments []; default message [lastname]]; default message [lastname can't be empty]] ]
+2022-03-20 02:07:18.902  INFO 7468 --- [io-28852-exec-2] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@7447e97e
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 76
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 11?[0m
+2022-03-20 02:07:18.913  INFO 7468 --- [io-28852-exec-3] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@1f34ad83
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 62
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-03-20 02:07:18.918  WARN 7468 --- [io-28852-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity&lt;account.domain.User&gt; account.controller.AuthController.signup(account.domain.User): [Field error in object 'user' on field 'lastname': rejected value [null]; codes [NotBlank.user.lastname,NotBlank.lastname,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.lastname,lastname]; arguments []; default message [lastname]]; default message [lastname can't be empty]] ]
+2022-03-20 02:07:18.920  INFO 7468 --- [io-28852-exec-3] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@7b77703e
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 62
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 12?[0m
+2022-03-20 02:07:18.930  INFO 7468 --- [io-28852-exec-4] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@4679c599
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 63
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-03-20 02:07:18.994  WARN 7468 --- [io-28852-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity&lt;account.domain.User&gt; account.controller.AuthController.signup(account.domain.User) with 2 errors: [Field error in object 'user' on field 'email': rejected value []; codes [NotBlank.user.email,NotBlank.email,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.email,email]; arguments []; default message [email]]; default message [email can't be empty]] [Field error in object 'user' on field 'email': rejected value []; codes [Pattern.user.email,Pattern.email,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.email,email]; arguments []; default message [email],[Ljavax.validation.constraints.Pattern$Flag;@401d3023,\w+(@acme.com)$]; default message [must match &quot;\w+(@acme.com)$&quot;]] ]
+2022-03-20 02:07:18.995  INFO 7468 --- [io-28852-exec-4] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@1f29f5a1
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 63
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 13?[0m
+2022-03-20 02:07:19.052  INFO 7468 --- [io-28852-exec-5] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@6c537884
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 62
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-03-20 02:07:19.096  WARN 7468 --- [io-28852-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity&lt;account.domain.User&gt; account.controller.AuthController.signup(account.domain.User): [Field error in object 'user' on field 'lastname': rejected value [null]; codes [NotBlank.user.lastname,NotBlank.lastname,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.lastname,lastname]; arguments []; default message [lastname]]; default message [lastname can't be empty]] ]
+2022-03-20 02:07:19.106  INFO 7468 --- [io-28852-exec-5] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@143b6233
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 62
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 14?[0m
+2022-03-20 02:07:19.170  INFO 7468 --- [io-28852-exec-6] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@20dd21d4
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 73
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-03-20 02:07:19.186  WARN 7468 --- [io-28852-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity&lt;account.domain.User&gt; account.controller.AuthController.signup(account.domain.User): [Field error in object 'user' on field 'password': rejected value []; codes [NotBlank.user.password,NotBlank.password,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.password,password]; arguments []; default message [password]]; default message [password can't be empty]] ]
+2022-03-20 02:07:19.190  INFO 7468 --- [io-28852-exec-6] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@665ce602
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 73
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 15?[0m
+2022-03-20 02:07:19.206  INFO 7468 --- [io-28852-exec-7] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@4e67fdee
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 59
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-03-20 02:07:19.215  WARN 7468 --- [io-28852-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity&lt;account.domain.User&gt; account.controller.AuthController.signup(account.domain.User): [Field error in object 'user' on field 'password': rejected value [null]; codes [NotBlank.user.password,NotBlank.password,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.password,password]; arguments []; default message [password]]; default message [password can't be empty]] ]
+2022-03-20 02:07:19.216  INFO 7468 --- [io-28852-exec-7] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@289a82d
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 59
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 16?[0m
+2022-03-20 02:07:19.227  INFO 7468 --- [io-28852-exec-8] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@4b2eb81
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 78
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-03-20 02:07:19.235  WARN 7468 --- [io-28852-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity&lt;account.domain.User&gt; account.controller.AuthController.signup(account.domain.User) with 2 errors: [Field error in object 'user' on field 'email': rejected value [johndoeacme.com]; codes [Email.user.email,Email.email,Email.java.lang.String,Email]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.email,email]; arguments []; default message [email],[Ljavax.validation.constraints.Pattern$Flag;@1fdce768,.*]; default message [must be a well-formed email address]] [Field error in object 'user' on field 'email': rejected value [johndoeacme.com]; codes [Pattern.user.email,Pattern.email,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.email,email]; arguments []; default message [email],[Ljavax.validation.constraints.Pattern$Flag;@401d3023,\w+(@acme.com)$]; default message [must match &quot;\w+(@acme.com)$&quot;]] ]
+2022-03-20 02:07:19.238  INFO 7468 --- [io-28852-exec-8] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@3e8cc513
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 78
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 17?[0m
+2022-03-20 02:07:19.247  INFO 7468 --- [o-28852-exec-10] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/api/auth/signup':
+
+org.apache.catalina.connector.RequestFacade@1a7ccc44
+
+servletPath:/api/auth/signup
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 81
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-03-20 02:07:19.250  WARN 7468 --- [o-28852-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity&lt;account.domain.User&gt; account.controller.AuthController.signup(account.domain.User): [Field error in object 'user' on field 'email': rejected value [johndoe@google.com]; codes [Pattern.user.email,Pattern.email,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.email,email]; arguments []; default message [email],[Ljavax.validation.constraints.Pattern$Flag;@401d3023,\w+(@acme.com)$]; default message [must match &quot;\w+(@acme.com)$&quot;]] ]
+2022-03-20 02:07:19.251  INFO 7468 --- [o-28852-exec-10] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@55863b40
+
+servletPath:/error
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 81
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 18?[0m
+2022-03-20 02:07:19.266  INFO 7468 --- [io-28852-exec-9] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/api/empl/payment':
+
+org.apache.catalina.connector.RequestFacade@784ed607
+
+servletPath:/api/empl/payment
+pathInfo:null
+headers: 
+authorization: Basic am9obmRvZUBhY21lLmNvbTpzZWNyZXQ=
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+?[1;31m
+Start test 19?[0m
+2022-03-20 02:07:19.370  INFO 7468 --- [io-28852-exec-3] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/api/empl/payment':
+
+org.apache.catalina.connector.RequestFacade@21983f1b
+
+servletPath:/api/empl/payment
+pathInfo:null
+headers: 
+authorization: Basic Sm9obkRvZUBhY21lLmNvbTpzZWNyZXQ=
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+?[1;31m
+Start test 20?[0m
+2022-03-20 02:07:19.381  INFO 7468 --- [io-28852-exec-4] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/api/empl/payment':
+
+org.apache.catalina.connector.RequestFacade@3149ac75
+
+servletPath:/api/empl/payment
+pathInfo:null
+headers: 
+authorization: Basic bWF4bXVzdGVybWFubkBhY21lLmNvbTpzZWNyZXQ=
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+?[1;31m
+Start test 21?[0m
+2022-03-20 02:07:19.393  INFO 7468 --- [io-28852-exec-5] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/api/empl/payment':
+
+org.apache.catalina.connector.RequestFacade@5d91da45
+
+servletPath:/api/empl/payment
+pathInfo:null
+headers: 
+authorization: Basic TWF4TXVzdGVybWFubkBhY21lLmNvbTpzZWNyZXQ=
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+?[1;31m
+Start test 22?[0m
+2022-03-20 02:07:19.405  INFO 7468 --- [io-28852-exec-6] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/api/empl/payment':
+
+org.apache.catalina.connector.RequestFacade@7c5b3a0f
+
+servletPath:/api/empl/payment
+pathInfo:null
+headers: 
+authorization: Basic Sm9obkRvZUBhY21lLmNvbTpub25l
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+2022-03-20 02:07:19.413  INFO 7468 --- [io-28852-exec-6] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@420352c8
+
+servletPath:/error
+pathInfo:null
+headers: 
+authorization: Basic Sm9obkRvZUBhY21lLmNvbTpub25l
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 23?[0m
+2022-03-20 02:07:19.440  INFO 7468 --- [io-28852-exec-7] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/api/empl/payment':
+
+org.apache.catalina.connector.RequestFacade@12af4a13
+
+servletPath:/api/empl/payment
+pathInfo:null
+headers: 
+authorization: Basic Sm9obkRvZUBhY21lLmNvbTpTRUNSRVQ=
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+2022-03-20 02:07:19.446  INFO 7468 --- [io-28852-exec-7] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@22c6a414
+
+servletPath:/error
+pathInfo:null
+headers: 
+authorization: Basic Sm9obkRvZUBhY21lLmNvbTpTRUNSRVQ=
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 24?[0m
+2022-03-20 02:07:19.455  INFO 7468 --- [io-28852-exec-8] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/api/empl/payment':
+
+org.apache.catalina.connector.RequestFacade@3d257f8f
+
+servletPath:/api/empl/payment
+pathInfo:null
+headers: 
+authorization: Basic am9obmRvZWFjbWUuY29tOnNlY3JldA==
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+2022-03-20 02:07:19.458  INFO 7468 --- [io-28852-exec-8] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@526c80fd
+
+servletPath:/error
+pathInfo:null
+headers: 
+authorization: Basic am9obmRvZWFjbWUuY29tOnNlY3JldA==
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 25?[0m
+2022-03-20 02:07:19.466  INFO 7468 --- [o-28852-exec-10] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/api/empl/payment':
+
+org.apache.catalina.connector.RequestFacade@2964d358
+
+servletPath:/api/empl/payment
+pathInfo:null
+headers: 
+authorization: Basic TWF4TXVzdGVybWFubkBhY21lLmNvbTpub25l
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+2022-03-20 02:07:19.467  INFO 7468 --- [o-28852-exec-10] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@16927163
+
+servletPath:/error
+pathInfo:null
+headers: 
+authorization: Basic TWF4TXVzdGVybWFubkBhY21lLmNvbTpub25l
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 26?[0m
+2022-03-20 02:07:19.476  INFO 7468 --- [io-28852-exec-1] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/api/empl/payment':
+
+org.apache.catalina.connector.RequestFacade@3ac8aadb
+
+servletPath:/api/empl/payment
+pathInfo:null
+headers: 
+authorization: Basic bmF1dGlsdXNAcG9tcGlsaXVzLmNvbTp3aW5ncw==
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+2022-03-20 02:07:19.480  INFO 7468 --- [io-28852-exec-1] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@5425cc4e
+
+servletPath:/error
+pathInfo:null
+headers: 
+authorization: Basic bmF1dGlsdXNAcG9tcGlsaXVzLmNvbTp3aW5ncw==
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 27?[0m
+2022-03-20 02:07:19.488  INFO 7468 --- [io-28852-exec-2] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/api/empl/payment':
+
+org.apache.catalina.connector.RequestFacade@17592cd6
+
+servletPath:/api/empl/payment
+pathInfo:null
+headers: 
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-03-20 02:07:19.495  INFO 7468 --- [io-28852-exec-2] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/error':
+
+org.apache.catalina.core.ApplicationHttpRequest@3fe3862f
+
+servletPath:/error
+pathInfo:null
+headers: 
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+?[1;31m
+Start test 28?[0m
+2022-03-20 02:07:19.514  INFO 7468 --- [io-28852-exec-9] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/actuator/shutdown':
+
+org.apache.catalina.connector.RequestFacade@2bc260ee
+
+servletPath:/actuator/shutdown
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 0
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+2022-03-20 02:07:20.540  INFO 7468 --- [     Thread-336] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-03-20 02:07:20.543  INFO 7468 --- [     Thread-336] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2022-03-20 02:07:20.544  INFO 7468 --- [     Thread-336] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-03-20 02:07:20.572  INFO 7468 --- [     Thread-336] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.3.1.RELEASE)
+
+2022-03-20 02:07:20.641  INFO 7468 --- [    Test worker] account.AccountServiceApplication        : Starting AccountServiceApplication on DESKTOP-L7B3B4M with PID 7468 (started by matro in C:\Users\matro\Documents\IdeaProjects\Account Service\Account Service\task)
+2022-03-20 02:07:20.642  INFO 7468 --- [    Test worker] account.AccountServiceApplication        : No active profile set, falling back to default profiles: default
+2022-03-20 02:07:21.118  INFO 7468 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2022-03-20 02:07:21.134  INFO 7468 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15ms. Found 1 JPA repository interfaces.
+2022-03-20 02:07:21.216  INFO 7468 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@ad7f88f' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-03-20 02:07:21.217  INFO 7468 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-03-20 02:07:21.281  INFO 7468 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
+2022-03-20 02:07:21.282  INFO 7468 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-03-20 02:07:21.283  INFO 7468 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
+2022-03-20 02:07:21.333  INFO 7468 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-03-20 02:07:21.333  INFO 7468 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 688 ms
+2022-03-20 02:07:21.389  INFO 7468 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2022-03-20 02:07:21.401  INFO 7468 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2022-03-20 02:07:21.401  INFO 7468 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:../service_db'
+2022-03-20 02:07:21.459  INFO 7468 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-03-20 02:07:21.466  INFO 7468 --- [         task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-03-20 02:07:21.478  INFO 7468 --- [         task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2022-03-20 02:07:21.529  WARN 7468 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-03-20 02:07:21.600  INFO 7468 --- [         task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-03-20 02:07:21.601  INFO 7468 --- [         task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-03-20 02:07:21.734  INFO 7468 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2022-03-20 02:07:21.753  INFO 7468 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2aac5a75, org.springframework.security.web.context.SecurityContextPersistenceFilter@6cfde485, org.springframework.security.web.header.HeaderWriterFilter@28308030, org.springframework.security.web.authentication.logout.LogoutFilter@4e8d3040, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1751e65f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3540e9ac, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@195dde34, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@18e04a2, org.springframework.security.web.session.SessionManagementFilter@45623783, org.springframework.security.web.access.ExceptionTranslationFilter@6a467452, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@75083c96]
+2022-03-20 02:07:21.753  WARN 7468 --- [    Test worker] o.s.s.c.a.web.builders.WebSecurity       : 
+
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+2022-03-20 02:07:21.841  INFO 7468 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
+2022-03-20 02:07:21.842  INFO 7468 --- [    Test worker] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2022-03-20 02:07:21.883  INFO 7468 --- [    Test worker] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2022-03-20 02:07:21.889  INFO 7468 --- [    Test worker] account.AccountServiceApplication        : Started AccountServiceApplication in 1.283 seconds (JVM running for 12.821)
+?[1;31m
+Start test 29?[0m
+2022-03-20 02:07:21.897  INFO 7468 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-03-20 02:07:21.897  INFO 7468 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-03-20 02:07:21.902  INFO 7468 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2022-03-20 02:07:21.903  INFO 7468 --- [io-28852-exec-1] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for GET '/api/empl/payment':
+
+org.apache.catalina.connector.RequestFacade@1a73976f
+
+servletPath:/api/empl/payment
+pathInfo:null
+headers: 
+authorization: Basic Sm9obkRvZUBhY21lLmNvbTpzZWNyZXQ=
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+Hibernate: select user0_.id as id1_0_, user0_.email as email2_0_, user0_.lastname as lastname3_0_, user0_.name as name4_0_, user0_.password as password5_0_ from users user0_ where upper(user0_.email)=upper(?)
+2022-03-20 02:07:21.927  INFO 7468 --- [io-28852-exec-2] Spring Security Debugger                 : 
+
+************************************************************
+
+Request received for POST '/actuator/shutdown':
+
+org.apache.catalina.connector.RequestFacade@6a374f14
+
+servletPath:/actuator/shutdown
+pathInfo:null
+headers: 
+content-type: application/json
+content-length: 0
+host: localhost:28852
+connection: Keep-Alive
+user-agent: Apache-HttpClient/4.5.12 (Java/11.0.13)
+accept-encoding: gzip,deflate
+
+
+Security filter chain: [
+  WebAsyncManagerIntegrationFilter
+  SecurityContextPersistenceFilter
+  HeaderWriterFilter
+  LogoutFilter
+  BasicAuthenticationFilter
+  RequestCacheAwareFilter
+  SecurityContextHolderAwareRequestFilter
+  AnonymousAuthenticationFilter
+  SessionManagementFilter
+  ExceptionTranslationFilter
+  FilterSecurityInterceptor
+]
+
+
+************************************************************
+
+
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.1</a> at 20 мар. 2022 г., 2:07:22</p>
+</div>
+</div>
+</body>
+</html>

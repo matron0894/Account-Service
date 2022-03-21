@@ -1,7 +1,7 @@
 package account.service;
 
-import account.domain.User;
-import account.repository.UserRepository;
+import account.model.User;
+import account.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,5 +29,14 @@ public class UserService {
         myUser.setEmail(myUser.getEmail().toLowerCase(Locale.ROOT));
         myUser.setPassword(passwordEncoder.encode(myUser.getPassword()));
         userRepository.save(myUser);
+    }
+
+    public boolean changePassword(User user, String new_password) {
+        if (!passwordEncoder.matches(new_password, user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(new_password));
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 }

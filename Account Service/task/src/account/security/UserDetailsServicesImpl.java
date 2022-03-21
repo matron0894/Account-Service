@@ -1,7 +1,7 @@
 package account.security;
 
-import account.domain.User;
-import account.repository.UserRepository;
+import account.model.User;
+import account.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,9 +29,9 @@ public class UserDetailsServicesImpl implements UserDetailsService {
                         .roles("ADMIN")
                         .build();
     }
-//    public User getUserByEmail(String email) throws UsernameNotFoundException {
-//        return userRepository.findUserByEmailIgnoreCase(email.toLowerCase(Locale.ROOT))
-//                .orElseThrow(() -> new UsernameNotFoundException("Not found: " + email));
-//
-//    }
+    public User getUserByEmail(String email) throws UsernameNotFoundException {
+        return userRepository.findUserByEmailIgnoreCase(email.toLowerCase(Locale.ROOT))
+                .orElseThrow(() -> new UsernameNotFoundException("Not found: " + email));
+
+    }
 }

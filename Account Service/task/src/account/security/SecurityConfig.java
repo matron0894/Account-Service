@@ -51,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .inMemoryAuthentication()
                 .withUser("admin")
-                .password("{noop}admin")
+                .password("{bcrypt}administrator")
                 .authorities("ROLE_ADMIN");
 
         auth

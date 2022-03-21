@@ -1,7 +1,8 @@
 package account.controller;
 
-import account.domain.User;
-import account.exception.UsernameNotFoundException;
+import account.exception.EmailNotFoundException;
+import account.model.User;
+import account.security.UserDetailsServicesImpl;
 import account.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,12 +19,12 @@ public class EmplController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserDetailsServicesImpl userDetailsServices;
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/payment")
     public User getPayment(@AuthenticationPrincipal UserDetails auth) {
-        String username = auth.getUsername();
-        return userService.findUser(username)
-                .orElseThrow(() -> new UsernameNotFoundException(username));
-
+        return userDetailsServices.getUserByEmail(auth.getUsername());
     }
 }

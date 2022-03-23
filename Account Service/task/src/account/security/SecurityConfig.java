@@ -29,7 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests() // manage access
                 .mvcMatchers(HttpMethod.GET, "/api/empl/payment").authenticated()
-                .mvcMatchers(HttpMethod.POST, "/api/signup", "/actuator/shutdown").permitAll()
+                .mvcMatchers(
+                        "/api/signup",
+                        "api/acct/payments",
+                        "/actuator/shutdown")
+                .permitAll()
                 // other matchers
                 .and()
                 .sessionManagement()
@@ -51,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
                 .inMemoryAuthentication()
                 .withUser("admin")
-                .password("{bcrypt}administrator")
+                .password("{bcrypt}administrat  or")
                 .authorities("ROLE_ADMIN");
 
         auth

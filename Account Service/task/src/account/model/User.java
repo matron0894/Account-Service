@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -34,6 +35,7 @@ public class User {
     @NotBlank(message = "Email cannot be blank!")
     @Pattern(regexp = "\\w+(@acme.com)$",
             message = "Not a valid email!")
+    @Column(unique = true)
     private String email;
 
     @NotBlank(message = "The password can't be empty")

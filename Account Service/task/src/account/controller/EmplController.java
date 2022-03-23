@@ -22,6 +22,7 @@ public class EmplController {
     @Autowired
     private UserDetailsServicesImpl userDetailsServices;
 
+    // GET api/empl/payment - gives access to the payroll of an employee.
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/payment")
     public User getPayment(@AuthenticationPrincipal UserDetails auth) {

@@ -15,6 +15,6 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
     boolean findByPeriodEquals(String date);
 
     Optional<Payment> findByEmployeeAndPeriod(String employee, String period);
-    //Optional<List<Payment>> findAllPaymentsById(Long id);
+    Optional<List<Payment>> findAllPaymentsById(Long id);
 
 }

@@ -35,7 +35,7 @@ public class PaymentController {
 
 
     @PutMapping("/payments")
-    public ResponseEntity<Map<String, String>> changeSalary( @Valid @RequestBody Payment payment) {
+    public ResponseEntity<Map<String, String>> changeSalary(@Valid @RequestBody Payment payment) {
         paymentService.changeSalary(payment);
         return new ResponseEntity<>(Map.of("status", "Added successfully!"), HttpStatus.OK);
     }

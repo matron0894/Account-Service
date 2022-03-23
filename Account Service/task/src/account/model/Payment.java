@@ -1,5 +1,6 @@
 package account.model;
 
+import account.validation.DateFormatValidation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -30,7 +31,7 @@ public class Payment {
     private String employee;
 
 // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-yyyy")
-    @Pattern(regexp = "\\d{2}-\\d{4}", message = "Wrong date!")
+    @DateFormatValidation(message = "Wrong date!")
     @Column(name = "period", nullable = false/*, unique = true*/)
     private String period;
 

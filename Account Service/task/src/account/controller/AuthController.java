@@ -38,7 +38,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<User> signup(@Valid @RequestBody User user) {
-        Optional<User> newUser = userService.findUser(user.getEmail());
+        Optional<User> newUser = userService.findUserByEmail(user.getEmail());
         if (newUser.isPresent()) throw new UsernameFoundException();
         userService.addNewUser(user);
         return new ResponseEntity<>(user, HttpStatus.OK);

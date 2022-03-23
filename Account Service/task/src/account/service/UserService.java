@@ -21,7 +21,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Optional<User> findUser(String email) {
+    public Optional<User> findUserByEmail(String email) {
         return userRepository.findUserByEmailIgnoreCase(email);
     }
 

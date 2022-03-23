@@ -29,7 +29,7 @@ public class PaymentService {
     public void savePayments(List<Payment> payments) {
         Optional<User> user;
         for (int i = 0; i < payments.size(); i++) {
-            user = userService.findUser(payments.get(i).getEmployee());
+            user = userService.findUserByEmail(payments.get(i).getEmployee());
             payments.get(i).setUser(user.orElseThrow(EmailNotFoundException::new));
         }
         paymentRepository.saveAll(payments);

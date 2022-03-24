@@ -18,6 +18,8 @@ public @interface DateFormatValidation {
 
     public String message() default "Incorrect data";
 
+    boolean required() default true;
+
     //represents group of constraints
     public Class<?>[] groups() default {};
 

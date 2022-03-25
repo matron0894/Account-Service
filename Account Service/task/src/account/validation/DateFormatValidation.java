@@ -16,7 +16,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 @Constraint(validatedBy = DateFormatValidator.class)
 public @interface DateFormatValidation {
 
-    public String message() default "Incorrect data";
+    public String message() default "Wrong date!";
 
     boolean required() default true;
 

@@ -2,7 +2,7 @@ package account.controller;
 
 import account.exception.ErrorChangePasswordException;
 import account.exception.UsernameFoundException;
-import account.model.ChangePass;
+import account.model.NewPassword;
 import account.model.User;
 import account.security.UserDetailsServicesImpl;
 import account.service.UserService;
@@ -48,7 +48,7 @@ public class AuthController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/changepass")
     public ResponseEntity<Map<String, String>> changePass(@AuthenticationPrincipal UserDetails auth,
-                                                          @Valid @RequestBody ChangePass changePass) {
+                                                          @Valid @RequestBody NewPassword changePass) {
         User user = userDetailsServices.getUserByEmail(auth.getUsername());
         boolean isChange = userService.changePassword(user, changePass.getNew_password());
         if (!isChange) {

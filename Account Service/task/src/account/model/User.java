@@ -1,19 +1,19 @@
 package account.model;
 
 import account.validation.BreachedPasswordValidation;
+import account.validation.LengthConstraintValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @Data
 @Entity
-@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -33,17 +33,21 @@ public class User {
 
     @Email
     @NotBlank(message = "Email cannot be blank!")
-    @Pattern(regexp = "\\w+(@acme.com)$",
+    @Pattern(regexp = ".*@acme.com$",
             message = "Not a valid email!")
     @Column(unique = true)
     private String email;
 
     @NotBlank(message = "The password can't be empty")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Size(min = 12, message = "The password length must be at least 12 chars!")
-    @BreachedPasswordValidation(message = "The password is in the hacker's database!")
+    @LengthConstraintValidation
+    @BreachedPasswordValidation
     private String password;
 
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<String> roles;
 
 
 }

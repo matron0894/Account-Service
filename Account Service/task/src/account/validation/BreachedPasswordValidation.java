@@ -16,7 +16,7 @@ import static java.lang.annotation.ElementType.PARAMETER;
 @Constraint(validatedBy = BreachedPasswordValidator.class)
 public @interface BreachedPasswordValidation {
 
-    public String message() default "Incorrect data";
+    public String message() default "The password is in the hacker's database!";
 
     //represents group of constraints
     public Class<?>[] groups() default {};

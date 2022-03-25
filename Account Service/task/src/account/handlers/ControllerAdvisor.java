@@ -22,29 +22,6 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
-/*
-    @ExceptionHandler(CityNotFoundException.class)
-    public ResponseEntity<Object> handleCityNotFoundException(
-            CityNotFoundException ex, WebRequest request) {
-
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", "City not found");
-
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(NoDataFoundException.class)
-    public ResponseEntity<Object> handleNodataFoundException(
-            NoDataFoundException ex, WebRequest request) {
-
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("message", "No cities found");
-
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
-    }*/
-
     // @Validate For Validating Path Variables and Request Parameters
     @ExceptionHandler(ConstraintViolationException.class)
     public void constraintViolationException(HttpServletResponse response)

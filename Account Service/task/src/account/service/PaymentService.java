@@ -3,32 +3,37 @@ package account.service;
 import account.exception.ChangeSalaryException;
 import account.exception.EmailNotFoundException;
 import account.exception.UniquePeriodSalaryException;
-import account.exception.UsernameFoundException;
 import account.model.Payment;
 import account.model.User;
+import account.model.UserPaymentRepresentation;
 import account.repos.PaymentRepository;
 import account.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 @Transactional
 public class PaymentService {
 
+    private final SimpleDateFormat formatter = new SimpleDateFormat("MM-yyyy");
+    private final SimpleDateFormat month_year = new SimpleDateFormat("MMMMMMMMM-yyyy", Locale.ENGLISH);
+
     private final PaymentRepository paymentRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
-    public PaymentService(PaymentRepository paymentRepository, UserRepository userRepository) {
+    public PaymentService(PaymentRepository paymentRepository, UserService userService) {
         this.paymentRepository = paymentRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
-
 
     public void savePayments(List<Payment> payments) {
         for (int i = 0, paymentsSize = payments.size(); i < paymentsSize; i++) {
@@ -38,12 +43,11 @@ public class PaymentService {
             if (paymentRepository.existDublicateSalary(employee, period))
                 throw new UniquePeriodSalaryException(String.valueOf(i));
 
-            Optional<User> user = userRepository.findUserByEmailIgnoreCase(payment.getEmployee());
+            Optional<User> user = userService.findUserByEmail(payment.getEmployee());
             payment.setUser(user.orElseThrow(EmailNotFoundException::new));
         }
         paymentRepository.saveAll(payments);
     }
-
 
     public void changeSalary(Payment payment) {
         Optional<Payment> oldPayment = paymentRepository.findByEmployeeAndPeriod(payment.getEmployee(), payment.getPeriod());
@@ -54,14 +58,66 @@ public class PaymentService {
         paymentRepository.save(oldPayment.get());
     }
 
-    public List<Payment> getAllPaymentByEmployee(String employee) {
-        Optional<List<Payment>> payments = paymentRepository.findAllByEmployeeOrderByPeriodDesc(employee);
-        return payments.orElse(Collections.emptyList());
+    public ResponseEntity<Object> getPayments(String email, String inputPeriod) {
+        Optional<String> optionalS = Optional.ofNullable(inputPeriod);
+        return optionalS
+                .<ResponseEntity<Object>>map(period -> ResponseEntity.ok(getPaymentsByEmailAndPeriod(email, period)))
+                .orElseGet(() -> ResponseEntity.ok(getPaymentsByEmail(email)));
     }
 
-    public Payment getPaymentByEmployeeAndPeriod(String employee, String period) {
-        Optional<Payment> payment = paymentRepository.findByEmployeeAndPeriod(employee, period);
-        return payment.orElseThrow(UsernameFoundException::new);
+    public List<UserPaymentRepresentation> getPaymentsByEmail(String email) {
+        Optional<List<Payment>> payments = paymentRepository.findAllByEmployeeIgnoreCaseOrderByPeriodDesc(email);
+        List<Payment> paymentsList = payments.orElse(Collections.emptyList());
+        List<UserPaymentRepresentation> paymentData = new LinkedList<>();
+        paymentsList.forEach(payment -> {
+            User user = userService.findUserByEmail(payment.getEmployee())
+                    .orElseThrow(EmailNotFoundException::new);
+            paymentData.add(new UserPaymentRepresentation(
+                    user.getName(),
+                    user.getLastname(),
+                    formatPeriod(payment.getPeriod()),
+                    formatSalary(payment.getSalary())
+            ));
+        });
+        return paymentData;
     }
+
+    public UserPaymentRepresentation getPaymentsByEmailAndPeriod(String email, String period) {
+        Optional<Payment> payment = paymentRepository.findByEmployeeAndPeriod(email, period);
+        return payment.map(queriedPayment -> {
+            User user = userService.findUserByEmail(payment.get().getEmployee())
+                    .orElseThrow(EmailNotFoundException::new);
+            return new UserPaymentRepresentation(
+                    user.getName(),
+                    user.getLastname(),
+                    formatPeriod(payment.get().getPeriod()),
+                    formatSalary(payment.get().getSalary())
+            );
+        }).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "No Payment found"));
+    }
+
+    public String formatPeriod(String period) {
+        try {
+            Date date = formatter.parse(period);
+            return month_year.format(date);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Date!");
+        }
+    }
+
+    public String formatSalary(Long salary) {
+        try {
+            return String.format("%d dollar(s) %d cent(s)", salary / 100, salary % 100);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Salary!");
+        }
+    }
+
+//    public boolean isPaymentUnique(String employee, String period) {
+//        return paymentRepository.findPayrollByEmployeeIgnoreCaseAndPeriod(employee, period).isEmpty();
+//    }
 
 }

@@ -1,13 +1,11 @@
 package account.service;
 
-import account.model.Payment;
 import account.model.User;
 import account.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 

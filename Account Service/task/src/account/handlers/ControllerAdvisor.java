@@ -11,9 +11,11 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -28,6 +30,28 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
             throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value());
     }
+
+   /* @ExceptionHandler(value = {AccessDeniedException.class})
+    public void commence(HttpServletRequest request,
+                         HttpServletResponse response,
+                         AccessDeniedException accessDeniedException) throws IOException {
+        // 403
+        setResponseError(response,
+                HttpServletResponse.SC_FORBIDDEN,
+                String.format("Access Denies: %s", accessDeniedException.getMessage()));
+    }
+
+
+    private void setResponseError(HttpServletResponse response,
+                                  int errorCode,
+                                  String errorMessage) throws IOException{
+        response.setStatus(errorCode);
+        response.getWriter().write(errorMessage);
+        response.getWriter().flush();
+        response.getWriter().close();
+    }
+
+*/
 
     // error handle for @Valid
     @Override
@@ -54,5 +78,6 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
+
 
 }

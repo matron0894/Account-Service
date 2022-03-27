@@ -1,12 +1,17 @@
-package account.model;
+package account.view;
 
 import account.validation.BreachedPasswordValidation;
 import account.validation.LengthConstraintValidation;
-import lombok.Data;
+import lombok.*;
+import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotBlank;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Component
 public class NewPassword {
 
     @NotBlank(message = "Password cannot be null or blank")

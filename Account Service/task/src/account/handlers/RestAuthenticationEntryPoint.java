@@ -1,15 +1,15 @@
-package account.security;
+package account.handlers;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Service
+@Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
@@ -17,6 +17,12 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          HttpServletResponse response,
                          AuthenticationException authException)
             throws IOException, ServletException {
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+        // 401
+        response.sendError(
+                HttpServletResponse.SC_UNAUTHORIZED,
+                String.format("Forbidden: %s", authException.getMessage()));
+
     }
+
+
 }

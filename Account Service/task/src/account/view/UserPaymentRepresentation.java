@@ -1,4 +1,4 @@
-package account.model;
+package account.view;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @NoArgsConstructor
-@Component
 @AllArgsConstructor
+@Component
 public class UserPaymentRepresentation {
     private String name;
     private String lastname;

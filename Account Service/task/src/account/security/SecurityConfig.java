@@ -1,5 +1,7 @@
 package account.security;
 
+import account.handlers.CustomAccessDeniedHandler;
+import account.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,29 +12,38 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 @Configuration
 @EnableWebSecurity(debug = true)
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(
+        prePostEnabled = true, //enables Spring Security pre/post annotations
+        securedEnabled = true, //property determines if the @Secured annotation should be enabled
+        jsr250Enabled = true) //allows us to use the @RoleAllowed annotation.
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+    private AuthenticationEntryPoint authenticationEntryPoint;
 
     @Autowired
-    UserDetailsService userDetailsService;
+    private CustomAccessDeniedHandler accessDeniedHandler;
+
+    @Autowired
+    private UserDetailsServiceImpl userService;
 
     public void configure(HttpSecurity http) throws Exception {
-        http
+        http.httpBasic()
+                .authenticationEntryPoint(authenticationEntryPoint) // Handle auth error
+
+                .and()
                 .authorizeRequests() // manage access
                 .mvcMatchers(
+                        "/h2-console/**",
                         "/api/auth/signup",
-                        "api/acct/payments",
-                        "/actuator/shutdown")
-                .permitAll()
+                        "/api/acct/payments",
+                        "/actuator/shutdown").permitAll()
                 .anyRequest().authenticated()
                 // other matchers
 
@@ -41,24 +52,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // no session
 
                 .and()
-                .httpBasic()
-                .authenticationEntryPoint(restAuthenticationEntryPoint) // Handle auth error
-
-                .and()
                 .csrf().disable()
                 .headers()
                 .frameOptions()
-                .disable(); // for Postman, the H2 console
+                .disable() // for Postman, the H2 console*/
 
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler(accessDeniedHandler);
     }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
+   /*     auth
                 .inMemoryAuthentication()
                 .withUser("admin")
-                .password("{bcrypt}administrat  or")
-                .authorities("ROLE_ADMIN");
+                .password("{bcrypt}administrator")
+                .authorities("ROLE_ADMINISTRATOR");*/
 
         auth
                 .authenticationProvider(authenticationProvider()); // or  builder.userDetailsService(userDetailsService);
@@ -68,13 +79,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(getPasswordEncoder());
-        provider.setUserDetailsService(userDetailsService);
+        provider.setUserDetailsService(userService);
         return provider;
     }
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
-        return new BCryptPasswordEncoder(13);
+        return new BCryptPasswordEncoder();
     }
+
 
 }

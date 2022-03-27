@@ -6,33 +6,46 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class UserDetailsImpl implements UserDetails {
-    private final String username;
-    private final String password;
-    private final List<GrantedAuthority> rolesAndAuthorities;
+
+    private final User user;
 
     public UserDetailsImpl(User user) {
-        username = user.getEmail().toLowerCase(Locale.ROOT);
-        password = user.getPassword();
-        rolesAndAuthorities = List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return rolesAndAuthorities;
+        return user.getRoles().stream().map(x -> "ROLE_" + x.getCode().toUpperCase())
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toSet());
+//        return Set.of(new SimpleGrantedAuthority("ROLE_USER"));
+//
+//        if (user.getRoles().isEmpty()) {
+//            return Set.of(new SimpleGrantedAuthority("ROLE_USER"));
+//        }
+//        else {
+//            return user.getRoles().stream().map(x -> "ROLE_" + x.getCode().toUpperCase())
+//                        .map(SimpleGrantedAuthority::new)
+//                        .collect(Collectors.toSet());
+//        }
     }
+
 
     @Override
     public String getPassword() {
-        return password;
+        return  user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return user.getEmail();
     }
 
     @Override

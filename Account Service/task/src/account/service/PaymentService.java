@@ -5,9 +5,8 @@ import account.exception.EmailNotFoundException;
 import account.exception.UniquePeriodSalaryException;
 import account.model.Payment;
 import account.model.User;
-import account.model.UserPaymentRepresentation;
+import account.view.UserPaymentRepresentation;
 import account.repos.PaymentRepository;
-import account.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +26,10 @@ public class PaymentService {
     private final SimpleDateFormat month_year = new SimpleDateFormat("MMMMMMMMM-yyyy", Locale.ENGLISH);
 
     private final PaymentRepository paymentRepository;
-    private final UserService userService;
+    private final UserDetailsServiceImpl userService;
 
     @Autowired
-    public PaymentService(PaymentRepository paymentRepository, UserService userService) {
+    public PaymentService(PaymentRepository paymentRepository, UserDetailsServiceImpl userService) {
         this.paymentRepository = paymentRepository;
         this.userService = userService;
     }

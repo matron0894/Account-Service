@@ -2,18 +2,23 @@ package account.model;
 
 import account.validation.BreachedPasswordValidation;
 import account.validation.LengthConstraintValidation;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.SortNatural;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -45,9 +50,17 @@ public class User {
     private String password;
 
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @JsonIgnore
-    private List<String> roles;
-
+    @ManyToMany(
+            fetch = FetchType.EAGER,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "user_groups",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"
+            ))
+    @SortNatural
+    private SortedSet<Group> roles = new TreeSet<>();
 
 }

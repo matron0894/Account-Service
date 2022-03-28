@@ -1,9 +1,7 @@
 package account.model;
 
 import account.serializers.GroupSerializer;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +9,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -35,9 +32,9 @@ public class Group implements Serializable, Comparable<Group> {
         this.name = name;
     }
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+//    @JsonIgnore
+//    @ManyToMany(mappedBy = "roles")
+//    private Set<User> users;
 
 
     public int compareTo(@NotNull Group o) {

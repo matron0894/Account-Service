@@ -28,7 +28,7 @@ public class PaymentController {
     }
 
     @PostMapping("/payments")
-    public ResponseEntity<Map<String, String>> uploadPayrolls(@RequestBody List<@Valid Payment> payments) {
+    public ResponseEntity<Map<String, String>> uploadPayments(@RequestBody List<@Valid Payment> payments) {
         paymentService.savePayments(payments);
         return new ResponseEntity<>(Map.of("status", "Added successfully!"), HttpStatus.OK);
     }

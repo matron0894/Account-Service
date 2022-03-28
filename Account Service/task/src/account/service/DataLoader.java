@@ -3,9 +3,8 @@ package account.service;
 import account.model.Group;
 import account.repos.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class DataLoader {
 
     private final GroupRepository groupRepository;

@@ -2,6 +2,7 @@ package account.model;
 
 import account.validation.BreachedPasswordValidation;
 import account.validation.LengthConstraintValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -13,8 +14,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 @Data
 @Entity
@@ -50,17 +50,25 @@ public class User {
     private String password;
 
 
-    @ManyToMany(
-            fetch = FetchType.EAGER,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    @JoinTable(name = "user_groups",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id"
-            ))
-    @SortNatural
-    private SortedSet<Group> roles = new TreeSet<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<String> roles = new ArrayList<>(4);
 
+    public void addRole(String role) {
+        roles.add(role);
+    }
+
+    public void removeRole(String role) {
+        roles.remove(role);
+    }
+
+    public void modifyRole(String operation, String role) {
+        if (operation.equals("GRANT")) {
+            addRole(role);
+        }
+        if (operation.equals("REMOVE")) {
+            removeRole(role);
+        }
+        this.roles.sort(Comparator.naturalOrder());
+    }
 }

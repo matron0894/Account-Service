@@ -1,12 +1,11 @@
 package account.controller;
 
 import account.model.User;
-import account.service.UserDetailsServiceImpl;
+import account.service.UserService;
 import account.view.NewPassword;
+import account.view.UserAdminRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,20 +20,20 @@ import java.util.Map;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final UserDetailsServiceImpl userService;
+    private final UserService userService;
 
     @Autowired
-    public AuthController(UserDetailsServiceImpl userService) {
+    public AuthController(UserService userService) {
         this.userService = userService;
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<User> signup(@RequestBody @Valid User user) {
-        return new ResponseEntity<>(userService.registerUser(user), HttpStatus.OK);
+    public UserAdminRepresentation signup(@RequestBody @Valid User user) {
+        return userService.registerUser(user);
     }
 
 
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     @PostMapping("/changepass")
     public ResponseEntity<Map<String, String>> changePass(@AuthenticationPrincipal UserDetails auth,
                                                           @Valid @RequestBody NewPassword newPassword) {

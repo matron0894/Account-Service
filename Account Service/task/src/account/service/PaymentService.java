@@ -19,21 +19,21 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
-@Transactional
 public class PaymentService {
 
     private final SimpleDateFormat formatter = new SimpleDateFormat("MM-yyyy");
     private final SimpleDateFormat month_year = new SimpleDateFormat("MMMMMMMMM-yyyy", Locale.ENGLISH);
 
     private final PaymentRepository paymentRepository;
-    private final UserDetailsServiceImpl userService;
+    private final UserService userService;
 
     @Autowired
-    public PaymentService(PaymentRepository paymentRepository, UserDetailsServiceImpl userService) {
+    public PaymentService(PaymentRepository paymentRepository, UserService userService) {
         this.paymentRepository = paymentRepository;
         this.userService = userService;
     }
 
+    @Transactional
     public void savePayments(List<Payment> payments) {
         for (int i = 0, paymentsSize = payments.size(); i < paymentsSize; i++) {
             Payment payment = payments.get(i);
@@ -42,12 +42,12 @@ public class PaymentService {
             if (paymentRepository.existDublicateSalary(employee, period))
                 throw new UniquePeriodSalaryException(String.valueOf(i));
 
-            Optional<User> user = userService.findUserByEmail(payment.getEmployee());
-            payment.setUser(user.orElseThrow(EmailNotFoundException::new));
+            payment.setUser(userService.findUserByEmail(payment.getEmployee()));
         }
         paymentRepository.saveAll(payments);
     }
 
+    @Transactional
     public void changeSalary(Payment payment) {
         Optional<Payment> oldPayment = paymentRepository.findByEmployeeAndPeriod(payment.getEmployee(), payment.getPeriod());
         if (oldPayment.isEmpty()) {
@@ -69,8 +69,7 @@ public class PaymentService {
         List<Payment> paymentsList = payments.orElse(Collections.emptyList());
         List<UserPaymentRepresentation> paymentData = new LinkedList<>();
         paymentsList.forEach(payment -> {
-            User user = userService.findUserByEmail(payment.getEmployee())
-                    .orElseThrow(EmailNotFoundException::new);
+            User user = userService.findUserByEmail(payment.getEmployee());
             paymentData.add(new UserPaymentRepresentation(
                     user.getName(),
                     user.getLastname(),
@@ -84,8 +83,7 @@ public class PaymentService {
     public UserPaymentRepresentation getPaymentsByEmailAndPeriod(String email, String period) {
         Optional<Payment> payment = paymentRepository.findByEmployeeAndPeriod(email, period);
         return payment.map(queriedPayment -> {
-            User user = userService.findUserByEmail(payment.get().getEmployee())
-                    .orElseThrow(EmailNotFoundException::new);
+            User user = userService.findUserByEmail(payment.get().getEmployee());
             return new UserPaymentRepresentation(
                     user.getName(),
                     user.getLastname(),

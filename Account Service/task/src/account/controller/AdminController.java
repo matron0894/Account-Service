@@ -1,11 +1,17 @@
 package account.controller;
 
+import account.service.LoggingService;
 import account.service.UserService;
+import account.view.RequestAccessRepresentation;
 import account.view.UserAdminRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -15,11 +21,6 @@ import java.util.Map;
 //@PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
 @Validated
 public class AdminController {
-
-     /*  PUT api/admin/user/role sets the roles;
-        DELETE api/admin/user deletes users;
-        GET api/admin/user obtains information about all users; the information should not be sensitive. */
-
 
     private final UserService userService;
 
@@ -43,5 +44,11 @@ public class AdminController {
         return userService.updateUserRole(roleMap);
     }
 
+
+    @PutMapping("/user/access")
+    public Map<String, String> updateLockStatus(@Valid @RequestBody RequestAccessRepresentation representation) {
+        return userService.changeLockStatus(representation.getUser(),representation.getOperation());
+
+    }
 
 }

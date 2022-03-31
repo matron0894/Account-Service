@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -20,18 +21,99 @@ public class UserService {
     private static final Map<String, String> ROLES = Map.of(
             "USER", "ROLE_USER",
             "ADMINISTRATOR", "ROLE_ADMINISTRATOR",
-            "ACCOUNTANT", "ROLE_ACCOUNTANT"
+            "ACCOUNTANT", "ROLE_ACCOUNTANT",
+            "AUDITOR", "ROLE_AUDITOR"
     );
-
-    private final PasswordEncoder passwordEncoder;
-    private final UserRepository userRepository;
 
 
     @Autowired
+    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private final UserRepository userRepository;
+
     public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
     }
+
+
+    public void lock(User user) {
+        user.setAccountNonLocked(false);
+        user.setLockTime(LocalDate.now());
+        userRepository.save(user);
+    }
+
+    public void unlock(User user) {
+        user.setAccountNonLocked(true);
+        user.setLockTime(null);
+        userRepository.save(user);
+    }
+
+/*
+    public void increaseFailedAttempts(String email) {
+        User user = findUserByEmail(email);
+        int newFailAttempts = user.getFailedAttempt() + 1;
+        userRepository.updateFailedAttemptsForUser(newFailAttempts, user.getEmail());
+    }
+
+    public void resetFailAttempts(String username) {
+        int res = userRepository.updateFailedAttemptsForUser(0, username);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!   " + res);
+    }
+
+
+    public void updateFailAttempts(String email) {
+        User user = findUserByEmail(email);
+        if (user != null) {
+            if (user.isAccountNonLocked()) {
+                if (user.getFailedAttempt() < UserService.MAX_FAILED_ATTEMPTS - 1) {
+                    increaseFailedAttempts(email);
+                } else {
+                    lock(user);
+                    throw new LockedException("Your account has been locked due to 3 failed attempts."
+                            + " It will be unlocked after 24 hours.");
+                }
+            } else {
+                if (unlockWhenTimeExpired(user)) {
+                    throw new LockedException("Your account has been unlocked. Please try to login again.");
+                }
+            }
+        }
+    }
+
+     public boolean unlockWhenTimeExpired(User user) {
+        long lockTimeInMillis = user.getLockTime().getDayOfMonth();
+        long currentTimeInMillis = System.currentTimeMillis();
+
+        if (lockTimeInMillis + LOCK_TIME_DURATION < currentTimeInMillis) {
+            user.setAccountNonLocked(true);
+            user.setLockTime(null);
+            user.setFailedAttempt(0);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+*/
+    public Map<String, String> changeLockStatus(String username, String operation) {
+        User user = userRepository.findUserByEmailIgnoreCase(username)
+                .orElseThrow(UserNotFoundException::new);
+
+        if (user.getRoles().contains("ROLE_ADMINISTRATOR"))
+            throw new AdministratorLockException();
+
+        if (operation.equals("LOCK")) {
+            lock(user);
+            return Map.of("status", "User " + username + " locked!");
+        }
+        if (operation.equals("UNLOCK")) {
+            unlock(user);
+            return Map.of("status", "User " + username + " unlocked!");
+        }
+        throw new NoSuchOperationException();
+    }
+
+
 
     public User findUserByEmail(String email) throws ResponseStatusException {
         return userRepository
@@ -40,11 +122,11 @@ public class UserService {
     }
 
 
+    /*  @PostMapping("/signup") */
     public UserAdminRepresentation registerUser(User newUser) {
         Optional<User> userOptional = userRepository.findUserByEmailIgnoreCase(newUser.getEmail());
         if (userOptional.isPresent())
             throw new UserExistException();
-
         return new UserAdminRepresentation(userRepository.save(
                 getUserModelWithAddedRoles(userRepository.findAll().isEmpty(), newUser)));
     }
@@ -53,10 +135,11 @@ public class UserService {
         appUser.addRole(isFirstUser ? ROLES.get("ADMINISTRATOR") : ROLES.get("USER"));
         appUser.setEmail(appUser.getEmail().toLowerCase(Locale.ROOT));
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
+        appUser.setAccountNonLocked(true);
         return appUser;
     }
 
-    public Map<String, String> changePassword(String email, String newPassword) {
+    public User changePassword(String email, String newPassword) {
         Optional<User> appUserOptional = userRepository.findUserByEmailIgnoreCase(email);
         User appUser = appUserOptional.orElseThrow(UserNotFoundException::new);
 
@@ -65,10 +148,8 @@ public class UserService {
         }
         appUser.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(appUser);
-        return Map.of(
-                "status", "The password has been updated successfully",
-                "email", appUser.getEmail()
-        );
+        return appUser;
+
     }
 
     public List<UserAdminRepresentation> getAllUsersAndInfo() {
@@ -133,7 +214,6 @@ public class UserService {
                 && requestedRole.equals("ADMINISTRATOR");
     }
 
-
     public Map<String, String> deleteUserByEmail(String email) throws ResponseStatusException {
         User appUser = userRepository.findUserByEmailIgnoreCase(email)
                 .orElseThrow(UserNotFoundException::new);
@@ -147,4 +227,6 @@ public class UserService {
                 "status", "Deleted successfully!"
         );
     }
+
+
 }

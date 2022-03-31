@@ -1,4 +1,4 @@
-package account.security;
+package account.service;
 
 import account.model.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,11 +13,13 @@ public class UserDetailsImpl implements UserDetails {
 
     private final String username;
     private final String password;
+    private final boolean isAccountNonLocked;
     private final List<GrantedAuthority> authorityList;
 
     public UserDetailsImpl(User user) {
         this.username = user.getEmail();
         this.password = user.getPassword();
+        this.isAccountNonLocked = user.isAccountNonLocked();
         this.authorityList = user.getRoles()
                 .stream()
                 .map(SimpleGrantedAuthority::new)
@@ -58,7 +60,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return isAccountNonLocked;
     }
 
     @Override

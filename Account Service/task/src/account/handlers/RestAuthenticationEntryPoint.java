@@ -12,12 +12,14 @@ import java.io.IOException;
 @Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-    @Override
+      @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
                          AuthenticationException authException)
             throws IOException, ServletException {
         // 401
+        System.out.println("!!!!!!!!!!!!!!!!!!  in  RestAuthenticationEntryPoint");
+
         response.sendError(
                 HttpServletResponse.SC_UNAUTHORIZED,
                 String.format("Forbidden: %s", authException.getMessage()));

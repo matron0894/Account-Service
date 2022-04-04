@@ -6,40 +6,32 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserDetailsImpl implements UserDetails {
 
     private final String username;
     private final String password;
     private final boolean isAccountNonLocked;
-    private final List<GrantedAuthority> authorityList;
+    private final Set<GrantedAuthority> authorityList;
 
     public UserDetailsImpl(User user) {
         this.username = user.getEmail();
         this.password = user.getPassword();
         this.isAccountNonLocked = user.isAccountNonLocked();
-        this.authorityList = user.getRoles()
-                .stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        Set<GrantedAuthority> userRoles = new HashSet<>();
+        Set<String> roles = user.getRoles();
+        for (String r : roles) {
+            userRoles.add(new SimpleGrantedAuthority("ROLE_" + r));
+        }
+        this.authorityList = userRoles;
     }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorityList;
-//        return Set.of(new SimpleGrantedAuthority("ROLE_USER"));
-//
-//        if (user.getRoles().isEmpty()) {
-//            return Set.of(new SimpleGrantedAuthority("ROLE_USER"));
-//        }
-//        else {
-//            return user.getRoles().stream().map(x -> "ROLE_" + x.getCode().toUpperCase())
-//                        .map(SimpleGrantedAuthority::new)
-//                        .collect(Collectors.toSet());
-//        }
     }
 
 

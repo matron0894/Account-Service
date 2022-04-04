@@ -13,17 +13,13 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
 @Entity
-@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -66,26 +62,9 @@ public class User {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @JsonIgnore
-    @SortNatural
-    private List<String> roles = new ArrayList<>(4);
+    //@SortNatural
+    private Set<String> roles = new HashSet<>();
 
-    public void addRole(String role) {
-        roles.add(role);
-    }
-
-    public void removeRole(String role) {
-        roles.remove(role);
-    }
-
-    public void modifyRole(String operation, String role) {
-        if (operation.equals("GRANT")) {
-            addRole(role);
-        }
-        if (operation.equals("REMOVE")) {
-            removeRole(role);
-        }
-        this.roles.sort(Comparator.naturalOrder());
-    }
 
     @Override
     public boolean equals(Object o) {

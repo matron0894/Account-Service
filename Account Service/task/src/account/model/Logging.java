@@ -25,4 +25,13 @@ public class Logging {
     private String subject;
     private String object;
     private String path;
+
+
+    public Logging(Event action, String subject, String object, String path) {
+        this.date = LocalDate.now();
+        this.action = action;
+        this.subject = subject;
+        this.object = object;
+        this.path = path;
+    }
 }

@@ -1,16 +1,12 @@
 package account.service;
 
-import account.exception.UserExistException;
 import account.model.User;
-import account.model.UserDetailsDao;
 import account.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 /**
@@ -19,9 +15,11 @@ import java.util.Optional;
  */
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService, UserDetailsDao {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
+    //private LoginAttemptService loggingService;
+
 
     @Autowired
     public UserDetailsServiceImpl(UserRepository userRepository) {
@@ -31,46 +29,14 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserDetailsDa
     @Override
     public UserDetailsImpl loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("!!!!!!!!!!!!!!!!!!!! in UserDetailsServiceImpl");
-        Optional<User> user = userRepository.findUserByEmailIgnoreCase(username);
-        return user.map(UserDetailsImpl::new)
-                .orElseThrow(UserExistException::new);
-    }
+        Optional<User> userOptional = userRepository.findUserByEmailIgnoreCase(username);
 
-
-    public static final int MAX_FAILED_ATTEMPTS = 5;
-    //private static final long LOCK_TIME_DURATION = 24 * 60 * 60 * 1000; // 24 hour, duration of the lock time in milliseconds
-
-
-    @Override
-    public void updateFailAttempts(String username) {
-        Optional<User> optional = userRepository.findUserByEmailIgnoreCase(username);
-        if (optional.isPresent()) {
-            User loginUser = optional.get();
-            if (loginUser.isAccountNonLocked()) {
-                if (loginUser.getFailedAttempt() < MAX_FAILED_ATTEMPTS - 1) {
-                    increaseFailedAttempts(loginUser);
-                } else {
-                    loginUser.setAccountNonLocked(false);
-                    loginUser.setLockTime(LocalDate.now());
-                    userRepository.save(loginUser);
-                    throw new LockedException("Your account has been locked due to 3 failed attempts."
-                            + " It will be unlocked after 24 hours.");
-                }
-            }
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            return new UserDetailsImpl(user);
         }
-
+        throw new UsernameNotFoundException("Not found: " + username);
     }
 
-    @Override
-    public void resetFailAttempts(String username) {
-        int res = userRepository.updateFailedAttemptsForUser(0, username);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!  resetFailAttempts: " + res);
-    }
-
-
-    public void increaseFailedAttempts(User user) {
-        int newFailAttempts = user.getFailedAttempt() + 1;
-        userRepository.updateFailedAttemptsForUser(newFailAttempts, user.getEmail());
-    }
 
 }

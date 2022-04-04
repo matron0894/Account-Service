@@ -15,6 +15,7 @@ public interface UserRepository extends JpaRepository<User, Long > {
     Optional<User> findUserByEmailIgnoreCase(String username);
     // Boolean existsByEmail(String email);
 
+    Boolean existsByEmail(String email);
 
     /*to update the number of failed login attempts for a user based on his email*/
     @Modifying

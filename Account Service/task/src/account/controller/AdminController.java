@@ -1,11 +1,10 @@
 package account.controller;
 
-import account.service.LoggingService;
+import account.model.RoleOperation;
 import account.service.UserService;
 import account.view.RequestAccessRepresentation;
-import account.view.UserAdminRepresentation;
+import account.view.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
@@ -30,24 +29,26 @@ public class AdminController {
     }
 
     @GetMapping("/user")
-    public List<UserAdminRepresentation> showAllUserInfo() {
+    public List<UserRepresentation> showAllUserInfo(){
         return userService.getAllUsersAndInfo();
     }
 
     @DeleteMapping("/user/{email}")
-    public Map<String, String> deleteUser(@PathVariable(name = "email", required = false) String email) {
-        return userService.deleteUserByEmail(email.toLowerCase(Locale.ROOT));
+    public Map<String, String> deleteUser(@AuthenticationPrincipal UserDetails auth,
+                                          @PathVariable(name = "email", required = false) String email) {
+        return userService.deleteUserByEmail(email.toLowerCase(Locale.ROOT), auth.getUsername().toLowerCase(Locale.ROOT));
     }
 
     @PutMapping("/user/role")
-    public UserAdminRepresentation updateUserRole(@RequestBody Map<String, String> roleMap) {
-        return userService.updateUserRole(roleMap);
+    public UserRepresentation updateUserRole(@AuthenticationPrincipal UserDetails auth,
+                                             @Valid @RequestBody RoleOperation roleOperation) {
+        return userService.updateUserRole(roleOperation, auth.getUsername().toLowerCase(Locale.ROOT));
     }
 
 
     @PutMapping("/user/access")
     public Map<String, String> updateLockStatus(@Valid @RequestBody RequestAccessRepresentation representation) {
-        return userService.changeLockStatus(representation.getUser(),representation.getOperation());
+        return userService.changeLockStatus(representation.getUser(), representation.getOperation());
 
     }
 

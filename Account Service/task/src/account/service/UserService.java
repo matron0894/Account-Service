@@ -1,11 +1,20 @@
 package account.service;
 
 import account.exception.*;
+import account.model.Event;
+import account.model.Logging;
+import account.model.RoleOperation;
 import account.model.User;
+import account.repos.RoleGroupRepository;
+import account.repos.LogRepository;
 import account.repos.UserRepository;
-import account.view.UserAdminRepresentation;
+import account.view.NewPassword;
+import account.view.UserRepresentation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,26 +23,22 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
 @Service
 public class UserService {
 
-    private static final Map<String, String> ROLES = Map.of(
-            "USER", "ROLE_USER",
-            "ADMINISTRATOR", "ROLE_ADMINISTRATOR",
-            "ACCOUNTANT", "ROLE_ACCOUNTANT",
-            "AUDITOR", "ROLE_AUDITOR"
-    );
+    Logger log = LoggerFactory.getLogger(UserService.class);
 
-
-    @Autowired
     private final PasswordEncoder passwordEncoder;
-    @Autowired
+    private final RoleGroupRepository groups;
     private final UserRepository userRepository;
+    private final LogRepository events;
 
-    public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    @Autowired
+    public UserService(PasswordEncoder passwordEncoder, RoleGroupRepository groups, UserRepository userRepository, LogRepository events) {
         this.passwordEncoder = passwordEncoder;
+        this.groups = groups;
         this.userRepository = userRepository;
+        this.events = events;
     }
 
 
@@ -41,60 +46,64 @@ public class UserService {
         user.setAccountNonLocked(false);
         user.setLockTime(LocalDate.now());
         userRepository.save(user);
+        log.info(Util.getEmail());
+        events.save(new Logging(Event.LOCK_USER, Util.getEmail(), String.format("Lock user %s", user.getEmail()), "/api/admin/user/access"));
     }
 
     public void unlock(User user) {
         user.setAccountNonLocked(true);
         user.setLockTime(null);
         userRepository.save(user);
+
+        events.save(new Logging(Event.UNLOCK_USER, user.getEmail(), String.format("Unlock user %s", user.getEmail()), "/api/admin/user/access"));
     }
 
-/*
-    public void increaseFailedAttempts(String email) {
-        User user = findUserByEmail(email);
-        int newFailAttempts = user.getFailedAttempt() + 1;
-        userRepository.updateFailedAttemptsForUser(newFailAttempts, user.getEmail());
-    }
+    /*
+        public void increaseFailedAttempts(String email) {
+            User user = findUserByEmail(email);
+            int newFailAttempts = user.getFailedAttempt() + 1;
+            userRepository.updateFailedAttemptsForUser(newFailAttempts, user.getEmail());
+        }
 
-    public void resetFailAttempts(String username) {
-        int res = userRepository.updateFailedAttemptsForUser(0, username);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!   " + res);
-    }
+        public void resetFailAttempts(String username) {
+            int res = userRepository.updateFailedAttemptsForUser(0, username);
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!   " + res);
+        }
 
 
-    public void updateFailAttempts(String email) {
-        User user = findUserByEmail(email);
-        if (user != null) {
-            if (user.isAccountNonLocked()) {
-                if (user.getFailedAttempt() < UserService.MAX_FAILED_ATTEMPTS - 1) {
-                    increaseFailedAttempts(email);
+        public void updateFailAttempts(String email) {
+            User user = findUserByEmail(email);
+            if (user != null) {
+                if (user.isAccountNonLocked()) {
+                    if (user.getFailedAttempt() < UserService.MAX_FAILED_ATTEMPTS - 1) {
+                        increaseFailedAttempts(email);
+                    } else {
+                        lock(user);
+                        throw new LockedException("Your account has been locked due to 3 failed attempts."
+                                + " It will be unlocked after 24 hours.");
+                    }
                 } else {
-                    lock(user);
-                    throw new LockedException("Your account has been locked due to 3 failed attempts."
-                            + " It will be unlocked after 24 hours.");
-                }
-            } else {
-                if (unlockWhenTimeExpired(user)) {
-                    throw new LockedException("Your account has been unlocked. Please try to login again.");
+                    if (unlockWhenTimeExpired(user)) {
+                        throw new LockedException("Your account has been unlocked. Please try to login again.");
+                    }
                 }
             }
         }
-    }
 
-     public boolean unlockWhenTimeExpired(User user) {
-        long lockTimeInMillis = user.getLockTime().getDayOfMonth();
-        long currentTimeInMillis = System.currentTimeMillis();
+         public boolean unlockWhenTimeExpired(User user) {
+            long lockTimeInMillis = user.getLockTime().getDayOfMonth();
+            long currentTimeInMillis = System.currentTimeMillis();
 
-        if (lockTimeInMillis + LOCK_TIME_DURATION < currentTimeInMillis) {
-            user.setAccountNonLocked(true);
-            user.setLockTime(null);
-            user.setFailedAttempt(0);
-            userRepository.save(user);
-            return true;
+            if (lockTimeInMillis + LOCK_TIME_DURATION < currentTimeInMillis) {
+                user.setAccountNonLocked(true);
+                user.setLockTime(null);
+                user.setFailedAttempt(0);
+                userRepository.save(user);
+                return true;
+            }
+            return false;
         }
-        return false;
-    }
-*/
+    */
     public Map<String, String> changeLockStatus(String username, String operation) {
         User user = userRepository.findUserByEmailIgnoreCase(username)
                 .orElseThrow(UserNotFoundException::new);
@@ -113,115 +122,134 @@ public class UserService {
         throw new NoSuchOperationException();
     }
 
-
-
     public User findUserByEmail(String email) throws ResponseStatusException {
         return userRepository
                 .findUserByEmailIgnoreCase(email)
                 .orElseThrow(UserNotFoundException::new);
     }
 
-
     /*  @PostMapping("/signup") */
-    public UserAdminRepresentation registerUser(User newUser) {
+    public UserRepresentation registerUser(User newUser, UserDetails auth) {
         Optional<User> userOptional = userRepository.findUserByEmailIgnoreCase(newUser.getEmail());
         if (userOptional.isPresent())
             throw new UserExistException();
-        return new UserAdminRepresentation(userRepository.save(
+
+        Optional<UserDetails> object = Optional.ofNullable(auth);
+        String author = object.isPresent() ? auth.getUsername().toLowerCase(Locale.ROOT) : "Anonymous";
+
+        events.save(new Logging(Event.CREATE_USER, author, newUser.getEmail().toLowerCase(Locale.ROOT), "/api/auth/signup"));
+
+        return new UserRepresentation(userRepository.save(
                 getUserModelWithAddedRoles(userRepository.findAll().isEmpty(), newUser)));
     }
 
     public User getUserModelWithAddedRoles(boolean isFirstUser, User appUser) {
-        appUser.addRole(isFirstUser ? ROLES.get("ADMINISTRATOR") : ROLES.get("USER"));
+        String role = isFirstUser ? "ADMINISTRATOR" : "USER";
+        appUser.getRoles().add(role);
         appUser.setEmail(appUser.getEmail().toLowerCase(Locale.ROOT));
         appUser.setPassword(passwordEncoder.encode(appUser.getPassword()));
         appUser.setAccountNonLocked(true);
         return appUser;
     }
 
-    public User changePassword(String email, String newPassword) {
+    public User changePassword(UserDetails auth, NewPassword newPassword) {
+        String email = auth.getUsername().toLowerCase(Locale.ROOT);
         Optional<User> appUserOptional = userRepository.findUserByEmailIgnoreCase(email);
         User appUser = appUserOptional.orElseThrow(UserNotFoundException::new);
 
-        if (passwordEncoder.matches(newPassword, appUser.getPassword())) {
-            throw new ErrorChangePasswordException();
+        if (passwordEncoder.matches(newPassword.getNew_password(), appUser.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The passwords must be different!");
         }
-        appUser.setPassword(passwordEncoder.encode(newPassword));
+        appUser.setPassword(passwordEncoder.encode(newPassword.getNew_password()));
         userRepository.save(appUser);
+
+        events.save(
+                new Logging(
+                        Event.CHANGE_PASSWORD,
+                        email,
+                        email,
+                        "/api/auth/signup"));
+
         return appUser;
 
     }
 
-    public List<UserAdminRepresentation> getAllUsersAndInfo() {
+    public List<UserRepresentation> getAllUsersAndInfo() {
         return userRepository
                 .findAll()
                 .stream()
-                .map(UserAdminRepresentation::new)
+                .map(UserRepresentation::new)
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 
-    public String checkRoleUpdateRequestValidity(User appUser, String operation, String role) {
-        if (!ROLES.containsKey(role)) {
-            return "Role not found";
-        }
-        if (operation.equals("GRANT") && isCombiningRoles(appUser.getRoles(), role)) {
-            return "The user cannot combine administrative and business roles!";
-        }
-        if (operation.equals("GRANT") && appUser.getRoles().contains(ROLES.get(role))) {
-            return "User already has the role";
-        }
-        if (operation.equals("REMOVE") && role.equals("ADMINISTRATOR")) {
-            return "Can't remove ADMINISTRATOR role!";
-        }
-        if (operation.equals("REMOVE") && !appUser.getRoles().contains(ROLES.get(role))) {
-            return "The user does not have a role!";
-        }
-        if (operation.equals("REMOVE") && appUser.getRoles().size() == 1) {
-            return "The user must have at least one role!";
-        }
-        return null;
-    }
 
-    public UserAdminRepresentation updateUserRole(Map<String, String> roleMap) throws ResponseStatusException {
-        if (!ROLES.containsKey(roleMap.get("role"))) {
+    public UserRepresentation updateUserRole(RoleOperation roleOperation, String author) throws ResponseStatusException {
+
+        String operation = roleOperation.getOperation();
+        String role = roleOperation.getRole().toUpperCase(Locale.ROOT);
+
+        if (!groups.existsByCode("ROLE_" + role)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Role not found!");
         }
-        User appUser = userRepository.findUserByEmailIgnoreCase(roleMap.get("user"))
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found!"));
-        String operation = roleMap.get("operation");
-        String role = roleMap.get("role");
-        String errorMessage = checkRoleUpdateRequestValidity(appUser, operation, role);
-        if (errorMessage != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, errorMessage);
+        User user = userRepository.findUserByEmailIgnoreCase(roleOperation.getUser())
+                .orElseThrow(
+                        () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found!"));
+        Set<String> userRoles = user.getRoles();
+
+        if ("GRANT".equals(operation)) {
+            if (userRoles.contains("ADMINISTRATOR") || "ADMINISTRATOR".equals(role)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The user cannot combine administrative and business roles!");
+            }
+            userRoles.add(role);
+//            user.modifyRole(operation, groups.get(role));
+            events.save(
+                    new Logging(Event.GRANT_ROLE,
+                            author,
+                            String.format("Grant role %s to %s", role, roleOperation.getUser().toLowerCase(Locale.ROOT)),
+                            "/api/admin/user/role"));
+        } else if ("REMOVE".equals(operation)) {
+            if (!userRoles.contains(role)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The user does not have a role!");
+            }
+            if ("ADMINISTRATOR".equals(role)) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Can't remove ADMINISTRATOR role!");
+            }
+            if (userRoles.size() < 2) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The user must have at least one role!");
+            }
+            userRoles.remove(role);
+            events.save(
+                    new Logging(
+                            Event.REMOVE_ROLE,
+                            author,
+                            String.format("Remove role %s from %s", role, roleOperation.getUser().toLowerCase(Locale.ROOT)),
+                            "/api/admin/user/role"));
         }
-        appUser.modifyRole(operation, ROLES.get(role));
-        userRepository.save(appUser);
-        return new UserAdminRepresentation(appUser);
+
+        //  user.modifyRole(operation, ROLES.get(role));
+        userRepository.save(user);
+
+        return new UserRepresentation(user);
     }
 
-    public boolean isCombiningRoles(List<String> assignedRoles, String requestedRole) {
-        return isCombiningAdminWithBusinessRole(assignedRoles, requestedRole) ||
-                isCombiningBusinessRoleWithAdmin(assignedRoles, requestedRole);
-    }
 
-    private boolean isCombiningBusinessRoleWithAdmin(List<String> assignedRoles, String requestedRole) {
-        return assignedRoles.contains(ROLES.get("ADMINISTRATOR")) &&
-                (requestedRole.equals("ACCOUNTANT") || requestedRole.equals("USER"));
-    }
-
-    private boolean isCombiningAdminWithBusinessRole(List<String> assignedRoles, String requestedRole) {
-        return (assignedRoles.contains(ROLES.get("USER")) || assignedRoles.contains(ROLES.get("ACCOUNTANT")))
-                && requestedRole.equals("ADMINISTRATOR");
-    }
-
-    public Map<String, String> deleteUserByEmail(String email) throws ResponseStatusException {
+    public Map<String, String> deleteUserByEmail(String email, String author) throws ResponseStatusException {
         User appUser = userRepository.findUserByEmailIgnoreCase(email)
-                .orElseThrow(UserNotFoundException::new);
+                .orElseThrow(
+                        UserNotFoundException::new);
 
-        if (appUser.getRoles().contains(ROLES.get("ADMINISTRATOR"))) {
+        if (appUser.getRoles().contains("ADMINISTRATOR")) {
             throw new DeleteAdministratorRoleException();
         }
         userRepository.delete(appUser);
+
+        events.save(
+                new Logging(
+                        Event.DELETE_USER,
+                        author,
+                        email,
+                        "/api/admin/user"));
+
         return Map.of(
                 "user", email,
                 "status", "Deleted successfully!"
